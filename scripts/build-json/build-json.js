@@ -20,9 +20,14 @@ function walk(directory, filepaths) {
 function collectItems(directory, searchPaths) {
     let filepaths = [];
     walk(directory, filepaths);
-    filepaths = filepaths.map( 
-        filepath => filepath.slice(path.join(process.cwd(), './content/').length) 
-    ).filter(filepath => !searchPaths.length || searchPaths.some(searchPath => filepath.includes(searchPath)))
+    filepaths = filepaths.map(
+        filepath => filepath.slice(path.join(process.cwd(), './content/').length)
+    ).filter(x => {
+        // FIXME: We're currently only supporting the building of HTML 
+        // elements from the ./content folder. So for now, exclude anything 
+        // else.
+        return x.includes('html/');
+    }).filter(filepath => !searchPaths.length || searchPaths.some(searchPath => filepath.includes(searchPath)))
     return filepaths;
 }
 
