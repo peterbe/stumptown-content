@@ -1,6 +1,7 @@
 ---
 width: 672
 height: 242
+title: ANYTHING
 ---
 This example demonstrates the use of `<address>` to demarcate the
 contact information for an article\'s author.
