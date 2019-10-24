@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
+const { trueCasePathSync } = require('true-case-path');
 const matter = require('gray-matter');
 const markdown = require('./markdown-converter');
 
@@ -13,6 +14,11 @@ async function packageDescription(examplePath) {
 
 function packageSources(examplePath) {
     const exampleSource = {};
+    if (examplePath !== trueCasePathSync(examplePath)) {
+        throw new Error(
+            `Case different path ${examplePath} != ${trueCasePathSync(examplePath)}`
+            );
+    }
 
     const jsPath = path.join(examplePath, 'example.js');
     if (fs.existsSync(jsPath)) {
